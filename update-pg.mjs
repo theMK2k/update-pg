@@ -153,7 +153,7 @@ FROM public.pg_updates
   return result.rows;
 }
 
-setLevel(2); // TODO: set via --loglevel
+setLevel(1); // TODO: set via --loglevel
 const UPDATE_SCRIPTS_LOCATION = path.join("pg", "pg-updates");
 const UPDATE_SCRIPTS_JSON_LOCATION = path.join("pg", "pg-updates.json");
 
@@ -329,6 +329,7 @@ let currentOra = null;
         updateCounter++;
 
         currentQuery = script;
+
         await pgClient.query(currentQuery);
 
         if (alreadyAppliedScript) {
@@ -386,8 +387,8 @@ let currentOra = null;
 
         error(err2);
 
-        info("last query:");
-        info(currentQuery);
+        error("last query:");
+        error(currentQuery);
       }
 
       currentOra = ora(`ROLLBACK due to errors`);
