@@ -122,7 +122,6 @@ async function manage_pg_updates_table(pgClient) {
       CREATE POLICY policy_public_pg_updates_all
         ON public.pg_updates
         FOR ALL
-        TO authenticated
         USING ( false )
         WITH CHECK ( false )
       ;
