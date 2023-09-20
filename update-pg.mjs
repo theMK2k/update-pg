@@ -291,7 +291,7 @@ let currentOra = null;
       await pgClient.query("BEGIN");
 
       for (const updateScript of updateScripts.updates) {
-        currentOra = ora(`applying ${updateScript}`);
+        currentOra = ora(`applying ${updateScript}`).start();
 
         const updateScriptFullPath = join(
           UPDATE_SCRIPTS_LOCATION,
@@ -351,7 +351,7 @@ let currentOra = null;
       if (!doCommit) {
         currentOra = ora(
           `ROLLBACK (dry run) - use --commit to actually write to pg`
-        );
+        ).start();
         await pgClient.query("ROLLBACK");
         currentOra.succeed();
 
@@ -369,7 +369,7 @@ let currentOra = null;
         exit(0);
       }
 
-      currentOra = ora("committing changes");
+      currentOra = ora("committing changes").start();
       await pgClient.query("COMMIT");
       currentOra.succeed();
 
@@ -390,7 +390,7 @@ let currentOra = null;
         error(currentQuery);
       }
 
-      currentOra = ora(`ROLLBACK due to errors`);
+      currentOra = ora(`ROLLBACK due to errors`).start();
       await pgClient.query("ROLLBACK");
       currentOra.succeed();
       exit(1);
