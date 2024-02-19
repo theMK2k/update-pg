@@ -1,6 +1,6 @@
 {
   "name": "update-pg",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "a Postgres database update script for your migrations",
   "main": "update-pg.mjs",
   "scripts": {
