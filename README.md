@@ -48,6 +48,7 @@ PGPASSWORD=<string, password for the user>
 PGPORT=<number, port of your pg instance>
 PGSSLREQUIRE=<true/false, require ssl>
 PGSSLALLOWSELFSIGNED=<true/false, allow self-signed certificates>
+PGSSLCERT=<-----BEGIN CERTIFICATE-----\n[...]\n-----END CERTIFICATE-----
 ```
 
 Run `node update-pg.mjs` and update-pg will perform the updates in **dry-run mode** (the actual updates will not be committed).

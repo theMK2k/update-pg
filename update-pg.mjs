@@ -241,7 +241,7 @@ function printWarnings() {
 }
 
 function isTrue(value) {
-	return value === true || value === "true";
+  return value === true || value === "true";
 }
 
 let pgClient = null;
@@ -258,18 +258,27 @@ let currentOra = null;
       password: process.env.PGPASSWORD,
       database: process.env.PGDATABASE,
     };
-    if (isTrue(process.env.PGSSLREQUIRE) || isTrue(process.env.PGSSLALLOWSELFSIGNED)) {
+
+    if (
+      isTrue(process.env.PGSSLREQUIRE) ||
+      isTrue(process.env.PGSSLALLOWSELFSIGNED)
+    ) {
       options.ssl = {
         require: true,
         rejectUnauthorized: false,
       };
 
-			if (isTrue(process.env.PGSSLREQUIRE)) {
-				options.ssl.require = true;
-			}
-			if (isTrue(process.env.PGSSLALLOWSELFSIGNED)) {
-				options.ssl.rejectUnauthorized = false;
-			}
+      if (isTrue(process.env.PGSSLREQUIRE)) {
+        options.ssl.require = true;
+      }
+      if (isTrue(process.env.PGSSLALLOWSELFSIGNED)) {
+        options.ssl.rejectUnauthorized = false;
+      }
+    }
+
+    if (process.env.PGSSLCERT) {
+      options.ssl = options.ssl || {};
+      options.ssl.ca = process.env.PGSSLCERT;
     }
 
     const pool = new pg.Pool(options);
