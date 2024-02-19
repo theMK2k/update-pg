@@ -46,6 +46,9 @@ PGUSER=<string, user of your pg instance>
 PGDATABASE=<string, database name>
 PGPASSWORD=<string, password for the user>
 PGPORT=<number, port of your pg instance>
+
+optional:
+
 PGSSLREQUIRE=<true/false, require ssl>
 PGSSLALLOWSELFSIGNED=<true/false, allow self-signed certificates>
 PGSSLCERT=<-----BEGIN CERTIFICATE-----\n[...]\n-----END CERTIFICATE----->
